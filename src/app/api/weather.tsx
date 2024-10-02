@@ -1,1 +1,1 @@
-jgfjgfi
+const weather = {}
