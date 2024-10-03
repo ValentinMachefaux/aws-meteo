@@ -50,10 +50,20 @@ export default function Page() {
 
   return (
     <div>
+      <div className="flex items-start h-28">
+    <div className="w-1/3">
       <Form onCitySubmit={handleCitySubmit} />
+    </div>
+    <div className="ml-auto pr-4">
       <WeatherDisplay weatherData={weatherData} />
+    </div>
+  </div>
+  <div className="pt-12">
       <WeatherChart chartData={chartData} />
+      <div className="pt-12">
       <CityList cities={cities} onDeleteCity={handleDeleteCity} />
+      </div>
+      </div>
     </div>
   );
 }

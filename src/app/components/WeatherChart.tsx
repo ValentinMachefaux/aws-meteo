@@ -55,7 +55,7 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ chartData }) => {
           scales: {
             y: {
               beginAtZero: true,
-              min: -20,
+              min: -10,
               max: 50,
             },
           },
