@@ -72,6 +72,32 @@ const Graph = () => {
     "tornado": "tornade",
   };
 
+  // A récupérer
+
+  // Fonction pour générer un dégradé global de 0°C à 40°C pour toutes les barres
+  const getGlobalGradient = (ctx) => {
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    
+    // Bleu pour les températures froides
+    gradient.addColorStop(0.1, 'darkred');   // 0°C
+
+    gradient.addColorStop(0.2, 'red');   // 0°C
+
+    gradient.addColorStop(0.25, 'orange');   // 0°C
+    // Jaune pour les températures moyennes
+    gradient.addColorStop(0.3, 'green');  // 20°C
+
+    gradient.addColorStop(0.5, 'blue');  // 20°C
+
+    gradient.addColorStop(0.7, 'darkblue');   // 40°C
+
+    gradient.addColorStop(1, 'black');   // 40°C
+
+    return gradient;
+  };
+
+  // A récupérer
+  
   const fetchWeatherData = async (city) => {
     const API_KEY = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
@@ -188,9 +214,9 @@ const Graph = () => {
             </li>
           ))}
         </ul>
-      </div>
+      </div> 
 
-      {/* Affichage du graphique */}
+      {/* A récupérer */}
       <div className="w-full" style={{ maxWidth: "600px" }}>
         <Bar
           data={{
@@ -199,7 +225,11 @@ const Graph = () => {
               {
                 label: "Température (°C)",
                 data: sortedChartData.map((data) => data.degree),
-                backgroundColor: "rgba(75, 192, 192, 0.6)",
+                backgroundColor: (context) => {
+                  const chart = context.chart;
+                  const { ctx } = chart;
+                  return getGlobalGradient(ctx); // Utilisation du même dégradé pour toutes les barres
+                },
               },
             ],
           }}
@@ -209,6 +239,8 @@ const Graph = () => {
             scales: {
               y: {
                 beginAtZero: true,
+                min: -50,
+                max: 50, // Fixer la limite max pour correspondre à notre échelle de gradient
               },
             },
           }}
@@ -217,5 +249,7 @@ const Graph = () => {
     </div>
   );
 };
+
+// A récupérer
 
 export default Graph;
