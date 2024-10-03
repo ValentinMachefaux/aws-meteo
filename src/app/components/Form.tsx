@@ -23,7 +23,7 @@ const Form: React.FC<FormProps> = ({ onCitySubmit }) => {
         value={city}
         onChange={(e) => setCity(e.target.value)}
         placeholder="Entrez une ville"
-        className="border p-2 mr-2"
+        className="border p-2 mr-2 text-black"
       />
       <button type="submit" className="bg-blue-500 text-white p-2">
         Obtenir la météo
